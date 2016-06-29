@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bms.tuser.dao.TUserMapper">
+	<resultMap id="BaseResultMap" type="com.bms.tuser.dao.holder.TUser">
+		<result column="ID" property="id" />
+		<result column="LOGIN_NAME" property="loginName" />
+		<result column="NAME" property="name" />
+		<result column="PASSWORD" property="password" />
+		<result column="TEL" property="tel" />
+		<result column="PHONE" property="phone" />
+		<result column="E_MAIL" property="eMail"/>
+		<result column="DATE_CREATED" property="dateCreated" />
+		<result column="LAST_LOGIN_TIME" property="lastLoginTime" />
+		<result column="T_STATE" property="tState" />
+		<result column="ROLE_ID" property="roleId" />
+		<result column="T_IMG" property="tImg" />
+	</resultMap>
+	<sql id="Base_Colnum_List_INSERT">
+		ID,LOGIN_NAME,NAME,PASSWORD,TEL,PHONE,E_MAIL,DATE_CREATED,LAST_LOGIN_TIME,T_STATE,ROLE_ID,T_IMG
+	</sql>
+	<sql id="Base_Colnum_List">
+		ID,LOGIN_NAME,NAME,PASSWORD,TEL,PHONE,E_MAIL,DATE_CREATED,LAST_LOGIN_TIME,T_STATE,ROLE_ID,
+      (SELECT a.NAME from T_ROLE a where a.ID=ROLE_ID) as roleName,T_IMG
+	</sql>
+
+	<sql id="Where_Clause">
+		where 1=1
+		<trim suffixOverrides=",">
+			<if test="id != null and id != ''">
+				and ID = #{id}
+			</if>
+			<if test="keyName != null and keyName != ''">
+				<![CDATA[ and (NAME like '%${keyName}%' OR LOGIN_NAME like '%${keyName}%') ]]>
+			</if>
+			<if test="loginName != null and loginName != ''">
+				and LOGIN_NAME = #{loginName}
+			</if>
+			<if test="name != null and name != ''">
+				and NAME = #{name}
+			</if>
+			<if test="password != null and password != ''">
+				and PASSWORD = #{password}
+			</if>
+			<if test="tel != null and tel != ''">
+				and TEL = #{tel}
+			</if>
+			<if test="phone != null and phone != ''">
+				and PHONE = #{phone}
+			</if>
+			<if test="eMail != null and eMail != ''">
+				and E_MAIL = #{eMail}
+			</if>
+			<if test="startDateCreated != null and startDateCreated != '' and endDateCreated != null and endDateCreated != ''">
+				<![CDATA[ AND  DATE_CREATED >= #{startDateCreated} and  DATE_CREATED <= #{endDateCreated}]]>
+			</if>
+			<if test="startLastLoginTime != null and startLastLoginTime != '' and endLastLoginTime != null and endLastLoginTime != ''">
+				<![CDATA[ AND  LAST_LOGIN_TIME >= #{startLastLoginTime} and  LAST_LOGIN_TIME < #{endLastLoginTime}]]>
+			</if>
+			<if test="tState != null ">
+				and T_STATE = #{tState}
+			</if>
+			<if test="roleId != null and roleId != ''">
+				and ROLE_ID = #{roleId}
+			</if>
+			<if test="tImg != null and tImg != ''">
+				and T_IMG = #{tImg}
+			</if>
+</trim>
+</sql>
+
+	<insert id="insert" parameterType="com.bms.tuser.dao.holder.TUser">
+		insert into t_user(
+		<include refid="Base_Colnum_List_INSERT" />
+		)values(
+		#{id},#{loginName},#{name},#{password},#{tel},#{phone},#{eMail},#{dateCreated},#{lastLoginTime},#{tState},#{roleId},#{tImg})
+	</insert>
+
+	<update id="update" parameterType="com.bms.tuser.dao.holder.TUser">
+		update t_user set
+		<trim suffixOverrides=",">
+			<if test="loginName != null and loginName != ''">
+				LOGIN_NAME=#{loginName},
+			</if>
+			<if test="name != null and name != ''">
+				NAME=#{name},
+			</if>
+			<if test="password != null and password != ''">
+				PASSWORD=#{password},
+			</if>
+			<if test="tel != null and tel != ''">
+				TEL=#{tel},
+			</if>
+			<if test="phone != null and phone != ''">
+				PHONE=#{phone},
+			</if>
+			<if test="eMail != null and eMail != ''">
+				E_MAIL=#{eMail},
+			</if>
+			<if test="dateCreated != null ">
+				DATE_CREATED=#{dateCreated},
+			</if>
+			<if test="lastLoginTime != null ">
+				LAST_LOGIN_TIME=#{lastLoginTime},
+			</if>
+			<if test="tState != null ">
+				T_STATE=#{tState},
+			</if>
+			<if test="roleId != null and roleId != ''">
+				ROLE_ID=#{roleId},
+			</if>
+			<if test="tImg != null and tImg != ''">
+				T_IMG=#{tImg}
+			</if>
+		</trim>
+		where ID=#{id}
+	</update>
+
+	<delete id="delete" parameterType="com.bms.tuser.dao.holder.TUser">
+		delete from t_user
+		<include refid="Where_Clause" />
+	</delete>
+
+	<select id="getList" resultMap="BaseResultMap"
+		parameterType="com.bms.tuser.dao.holder.TUser">
+		select
+		<include refid="Base_Colnum_List" />
+		from t_user
+		<include refid="Where_Clause" />
+	</select>
+
+	<select id="getCountOfSummary" resultType="int"
+		parameterType="com.bms.tuser.dao.holder.TUser">
+		select count(1) from t_user
+		<include refid="Where_Clause" />
+	</select>
+
+	<select id="getListOfSummary" resultMap="BaseResultMap"
+		parameterType="com.bms.tuser.dao.holder.TUser">
+		select
+		<include refid="Base_Colnum_List" />
+		from t_user
+		<include refid="Where_Clause" />
+		<if test="sortField != null and sortField != ''">
+			order by ${sortField} ${sortOrder}
+		</if>
+		limit ${startRecordNum},${perNumber}
+	</select>
+
+</mapper>  

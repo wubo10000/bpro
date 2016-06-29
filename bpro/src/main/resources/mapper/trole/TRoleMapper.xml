@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bms.trole.dao.TRoleMapper">
+    <resultMap id="BaseResultMap" type="com.bms.trole.dao.holder.TRole">
+        <result column="ID" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="ROLE_STATE" property="roleState"/>
+        <result column="PRIORITY" property="priority"/>
+    </resultMap>
+    <sql id="Base_Colnum_List">
+ID,NAME,ROLE_STATE,PRIORITY
+</sql>
+
+    <sql id="Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and ID = #{id}
+            </if>
+            <if test="keyName !=null and keyName !=''">
+                and NAME like '%${keyName}%'
+            </if>
+            <if test="name != null and name != ''">
+                and NAME = #{name}
+            </if>
+            <if test="roleState != null ">
+                and ROLE_STATE = #{roleState}
+            </if>
+            <if test="priority != null ">
+                and PRIORITY = #{priority}
+            </if>
+        </trim>
+    </sql>
+
+    <insert id="insert" parameterType="com.bms.trole.dao.holder.TRole">
+        insert into t_role(
+        <include refid="Base_Colnum_List"/>
+        )values(
+        #{id},#{name},#{roleState},#{priority})
+    </insert>
+
+    <update id="update" parameterType="com.bms.trole.dao.holder.TRole">
+        update t_role set
+        <trim suffixOverrides=",">
+            <if test="name != null and name != ''">
+                NAME=#{name},
+            </if>
+            <if test="roleState != null ">
+                ROLE_STATE=#{roleState},
+            </if>
+            <if test="priority != null ">
+                PRIORITY=#{priority}
+            </if>
+        </trim>
+        where ID=#{id}
+    </update>
+
+    <delete id="delete" parameterType="com.bms.trole.dao.holder.TRole">
+        delete from t_role
+        <include refid="Where_Clause"/>
+    </delete>
+
+    <select id="getList" resultMap="BaseResultMap" parameterType="com.bms.trole.dao.holder.TRole">
+        select
+        <include refid="Base_Colnum_List"/>
+        from t_role
+        <include refid="Where_Clause"/>
+    </select>
+
+    <select id="getCountOfSummary" resultType="int" parameterType="com.bms.trole.dao.holder.TRole">
+        select count(1) from t_role
+        <include refid="Where_Clause"/>
+    </select>
+
+    <select id="getListOfSummary" resultMap="BaseResultMap" parameterType="com.bms.trole.dao.holder.TRole">
+        select
+        <include refid="Base_Colnum_List"/>
+        from t_role
+        <include refid="Where_Clause"/>
+        <if test="sortField != null and sortField != ''">
+            order by ${sortField} ${sortOrder}
+        </if>
+        limit ${startRecordNum},${perNumber}
+    </select>
+
+</mapper>  
