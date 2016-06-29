@@ -13,7 +13,7 @@ import com.bms.system.file.FileUtil;
 
 public interface Constant
 {
-    String PROJECT_NAME = "bpro";
+    String PROJECT_NAME = "bms";
     String EXTJS_GENERATE_CODE_PATH = "D:/" + Constant.PROJECT_NAME + "GenerateCode/extjsCode/app/";
     String JAVA_GENERATE_CODE_PATH = "D:/" + Constant.PROJECT_NAME + "GenerateCode/javaCode/app/";
     String JAVA_PACKAGE_NAME = "com." + Constant.PROJECT_NAME;

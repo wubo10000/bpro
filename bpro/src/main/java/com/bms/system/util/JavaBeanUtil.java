@@ -833,7 +833,7 @@ public class JavaBeanUtil
         buf.append(System.getProperty("line.separator"));
         buf.append("                    ").append(StrUtil.headToLowerCase(bean.getClassName())).append(".setId(id);");
         buf.append(System.getProperty("line.separator"));
-        buf.append("                    list.add(").append(StrUtil.headToLowerCase(bean.getClassName())).append(")");
+        buf.append("                    list.add(").append(StrUtil.headToLowerCase(bean.getClassName())).append(");");
         buf.append(System.getProperty("line.separator"));
         buf.append("                }");
         buf.append(System.getProperty("line.separator"));

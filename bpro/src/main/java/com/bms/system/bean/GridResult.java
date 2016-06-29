@@ -12,6 +12,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class GridResult implements Serializable
 {
 
@@ -38,22 +41,22 @@ public class GridResult implements Serializable
 
     private String winning;
 
-    private int pageCount;
+    private Integer pageCount;
 
-    private int totalCount;
+    private Integer totalCount;
 
     private boolean success = true;
 
     private String msg = "操作成功";
 
-    private int isCompleted;
+    private Integer isCompleted;
 
-    public int getIsCompleted()
+    public Integer getIsCompleted()
     {
         return isCompleted;
     }
 
-    public void setIsCompleted(int isCompleted)
+    public void setIsCompleted(Integer isCompleted)
     {
         this.isCompleted = isCompleted;
     }
@@ -154,22 +157,22 @@ public class GridResult implements Serializable
         this.size = size;
     }
 
-    public int getPageCount()
+    public Integer getPageCount()
     {
         return pageCount;
     }
 
-    public void setPageCount(int pageCount)
+    public void setPageCount(Integer pageCount)
     {
         this.pageCount = pageCount;
     }
 
-    public int getTotalCount()
+    public Integer getTotalCount()
     {
         return totalCount;
     }
 
-    public void setTotalCount(int totalCount)
+    public void setTotalCount(Integer totalCount)
     {
         this.totalCount = totalCount;
     }

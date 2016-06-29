@@ -17,7 +17,7 @@
         <servlet-name>SpringMVC</servlet-name>
         <!-- Filter all resources -->
         <!--<url-pattern>/</url-pattern>-->
-        <url-pattern>*.l</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
     <!-- Spring MVC Config End -->
 
@@ -32,7 +32,7 @@
     </filter>
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
-        <url-pattern>*.l</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </filter-mapping>
 
     <filter>
@@ -41,7 +41,7 @@
     </filter>
     <filter-mapping>
         <filter-name>sessionFilter</filter-name>
-        <url-pattern>*.l</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </filter-mapping>
 
     <session-config>

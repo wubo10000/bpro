@@ -14,10 +14,12 @@
 	<result column="age" property="age" />
 	<result column="workage" property="workage" />
 	<result column="createtime" property="createtime" />
+	<result column="phone" property="phone" />
+	<result column="email" property="email" />
 </resultMap>
 
 <sql id="Base_Colnum_List">
-	id,usercode,nickname,pwd,realname,cardcode,shcool,age,workage,createtime
+	id,usercode,nickname,pwd,realname,cardcode,shcool,age,workage,createtime,phone,email
 </sql>
 
 <sql id="Where_Clause">
@@ -53,15 +55,21 @@
 		<if test="workage != null and workage != ''">
 			and workage = #{workage}
 		</if>
-		<if test="createtime != null and createtime != ''">
-			and createtime = #{createtime}
+		<if test="startCreatetimeStr != null and startCreatetimeStr != '' and endCreatetimeStr != null and endCreatetimeStr != '' ">
+			<![CDATA[ AND  createtime >= #{startCreatetimeStr} and  createtime <= #{endCreatetimeStr}]]>
+		</if>
+		<if test="phone != null and phone != ''">
+			and phone = #{phone}
+		</if>
+		<if test="email != null and email != ''">
+			and email = #{email}
 		</if>
 	</trim>
 </sql>
 
 <insert id="insert" parameterType="com.bms.fuser.dao.holder.FUser">
 	insert into f_user( <include refid="Base_Colnum_List" /> ) values( 
-		#{id},#{usercode},#{nickname},#{pwd},#{realname},#{cardcode},#{shcool},#{age},#{workage},#{createtime}
+		#{id},#{usercode},#{nickname},#{pwd},#{realname},#{cardcode},#{shcool},#{age},#{workage},#{createtime},#{phone},#{email}
 	)
 </insert>
 
@@ -92,8 +100,14 @@
 		<if test="workage != null and workage != ''">
 			workage=#{workage},
 		</if>
-		<if test="createtime != null and createtime != ''">
-			createtime=#{createtime}
+		<if test="createtime != null ">
+			createtime=#{createtime},
+		</if>
+		<if test="phone != null and phone != ''">
+			phone=#{phone},
+		</if>
+		<if test="email != null and email != ''">
+			email=#{email}
 		</if>
 	</trim>
 	where ID=#{id}

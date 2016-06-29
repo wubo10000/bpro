@@ -242,9 +242,9 @@ public class DataBaseUtil
         {
             return "Date";
         }
-        if (type.contains("time"))
+        if (type.contains("timestamp"))
         {
-            return "String";
+            return "Date";
         }
         if (type.contains("decimal"))
         {
