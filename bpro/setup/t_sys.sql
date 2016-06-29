@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_config`;
 CREATE TABLE `t_config` (
-  `ID` varchar(128) NOT NULL COMMENT '编号',
+  `ID` varchar(128) NOT NULL COMMENT '编号dfdfd',
   `T_KEY` int(4) DEFAULT NULL COMMENT '关键字',
   `T_VALUE` varchar(256) DEFAULT NULL COMMENT '内容',
   `T_GROUP` varchar(32) DEFAULT NULL COMMENT '分组',
