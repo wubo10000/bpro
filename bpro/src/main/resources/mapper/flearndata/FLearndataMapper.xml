@@ -9,10 +9,11 @@
 	<result column="summary" property="summary" />
 	<result column="filepath" property="filepath" />
 	<result column="createtime" property="createtime" />
+	<result column="ltype" property="ltype" />
 </resultMap>
 
 <sql id="Base_Colnum_List">
-	id,title,summary,filepath,createtime
+	id,title,summary,filepath,createtime,ltype
 </sql>
 
 <sql id="Where_Clause">
@@ -36,12 +37,15 @@
 		<if test="startCreatetimeStr != null and startCreatetimeStr != '' and endCreatetimeStr != null and endCreatetimeStr != '' ">
 			<![CDATA[ AND  createtime >= #{startCreatetimeStr} and  createtime <= #{endCreatetimeStr}]]>
 		</if>
+		<if test="ltype != null and ltype != ''">
+			and ltype = #{ltype}
+		</if>
 	</trim>
 </sql>
 
 <insert id="insert" parameterType="com.bms.flearndata.dao.holder.FLearndata">
 	insert into f_learndata( <include refid="Base_Colnum_List" /> ) values( 
-		#{id},#{title},#{summary},#{filepath},#{createtime}
+		#{id},#{title},#{summary},#{filepath},#{createtime},#{ltype}
 	)
 </insert>
 
@@ -58,7 +62,10 @@
 			filepath=#{filepath},
 		</if>
 		<if test="createtime != null ">
-			createtime=#{createtime}
+			createtime=#{createtime},
+		</if>
+		<if test="ltype != null and ltype != ''">
+			ltype=#{ltype}
 		</if>
 	</trim>
 	where ID=#{id}
