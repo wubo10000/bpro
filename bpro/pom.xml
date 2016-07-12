@@ -56,6 +56,7 @@
 
         <mysql.connector.version>5.1.26</mysql.connector.version>
 
+        <jackson.version>2.7.0</jackson.version>
         <jackson.core.lgpl.version>1.6.1</jackson.core.lgpl.version>
         <jackson.mapper.lgpl.version>1.6.1</jackson.mapper.lgpl.version>
 
@@ -373,6 +374,26 @@
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-lgpl</artifactId>
             <version>${jackson.mapper.lgpl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
         <!--json-lib-->

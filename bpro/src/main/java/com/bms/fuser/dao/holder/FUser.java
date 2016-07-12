@@ -5,7 +5,7 @@ import com.bms.system.inteface.Constant;
 import com.bms.system.util.DateUtil;
 public class FUser extends BaseHolder
 {
- private static final long serialVersionUID = 9018705241629904094L;
+ private static final long serialVersionUID = -8929299892521776120L;
 private String id;
 private String usercode;
 private String nickname;
@@ -23,6 +23,8 @@ private String startCreatetimeStr;
 private String endCreatetimeStr;
 private String phone;
 private String email;
+private String qualification;
+private String sex;
 
 public void setId( String id )
 {
@@ -197,6 +199,26 @@ public String getEmail()
 return this.email;
 }
 
+public void setQualification( String qualification )
+{
+this.qualification = qualification;
+}
+
+public String getQualification()
+{
+return this.qualification;
+}
+
+public void setSex( String sex )
+{
+this.sex = sex;
+}
+
+public String getSex()
+{
+return this.sex;
+}
+
 
 @Override
 public int hashCode()
@@ -242,6 +264,8 @@ buf.append(" startCreatetimeStr: [ " + this.getStartCreatetimeStr() + " ] ");
 buf.append(" endCreatetimeStr: [ " + this.getEndCreatetimeStr() + " ] "); 
 buf.append(" phone: [ " + this.getPhone() + " ] "); 
 buf.append(" email: [ " + this.getEmail() + " ] "); 
+buf.append(" qualification: [ " + this.getQualification() + " ] "); 
+buf.append(" sex: [ " + this.getSex() + " ] "); 
 return buf.toString();
  }
 

@@ -150,15 +150,28 @@ public class FUserController extends BaseController
     /**
      * 报名
      */
+    @RequestMapping("/tsRegister")
+    @ResponseBody
     public GridResult tsRegister(FUser bean){
     	GridResult result = new GridResult();
     	result.setSuccess(false);
-    	bean.setId(SystemUtil.getUUID());
-    	bean.setUsercode(SicUtil.getRandomString(8));
-    	bean.setCreatetime(new Date());
-    	int i = fUserService.tsInsert(bean);
-    	if(i==1){
-    		result.setSuccess(true);
+    	FUser selectbean = new FUser();
+    	selectbean.setCardcode(bean.getCardcode());
+    	if(fUserService.getList(selectbean).size()>0){
+    		result.setSuccess(false);
+    		result.setMsg("身份证号已注册");
+    	}else{
+    		bean.setId(SystemUtil.getUUID());
+        	bean.setUsercode(SicUtil.getRandomString(8));
+        	bean.setCreatetime(new Date());
+        	int i = fUserService.tsInsert(bean);
+        	if(i==1){
+        		result.setSuccess(true);
+        		result.setMsg("报名成功");
+        	}else{
+        		result.setSuccess(false);
+        		result.setMsg("操作失败");
+        	}
     	}
     	return result;
     }

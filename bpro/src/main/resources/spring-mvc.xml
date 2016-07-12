@@ -130,4 +130,15 @@
             <tx:method name="*" propagation="SUPPORTS"/>
         </tx:attributes>
     </tx:advice>
+    
+    
+<!--     <bean id="websocket" class="com.bms.websocket.WebsocketEndPoint"/>   -->
+  
+<!-- <websocket:handlers>   -->
+<!--     <websocket:mapping path="/websocket.do" handler="websocket"/>   -->
+<!--     <websocket:handshake-interceptors>   -->
+<!--     <bean class="com.bms.websocket.HandshakeInterceptor"/>   -->
+<!--     </websocket:handshake-interceptors>   -->
+<!-- </websocket:handlers>   -->
+    
 </beans>
